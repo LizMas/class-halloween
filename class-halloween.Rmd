@@ -1,0 +1,54 @@
+---
+title: "class-halloween"
+author: "Liz Masten"
+date: "31 October 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE) 
+
+library(gsheet)
+library(tidyverse)
+
+trains <- gsheet2tbl("1QV7o63fiZdNtMtLQfdwREapf8eYDjpfSRX0dgfNrB8A")
+
+```
+
+```{r}
+
+lm(att_start ~ male, data = trains)
+
+#ggplot(trains, aes(att_start)) +
+ # geom_histogram(binwidth = 1)
+
+#use geom_jitter to check for overlap 
+
+#ggplot(trains, aes(x = age, y = att_start)) +
+ # geom_jitter()
+
+#see if data fits prior expectation 
+
+#trains %>% 
+ # group_by(liberal) %>% 
+  #summarise(avg = mean(att_start))
+
+#same 
+
+#trains %>% 
+ # group_by(male) %>% 
+  #summarise(avg = mean(att_start))
+
+# you can explore by treatment and see that treated group started more liberal. 
+
+#facet_wrap brings in another variable by using ~ in argument; stat = count error can be fixed by doing this: 
+
+ggplot(trains) +
+  geom_bar(aes(x = att_start)) +
+  facet_wrap(~ male)
+
+
+
+```
+
+
